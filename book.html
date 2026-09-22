@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book — Laura Doss, LMT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stub-banner">ROUGH DRAFT · Sample times only · Not connected to a live calendar yet</div>
+  <div class="wrap">
+    <header>
+      <a class="logo" href="index.html">Laura Doss<span>LMT · Craniosacral &amp; Lymphatic Drainage</span></a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="book.html" class="btn" aria-current="page">Book</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <div class="wrap page-hero">
+      <h1>Book a session</h1>
+      <p class="lede">Pick a day and a time that works. Times below are sample slots for this draft — live availability comes later (Calendly or similar).</p>
+    </div>
+
+    <div class="wrap">
+      <form class="book-panel" id="book-form" action="mailto:healthyhandsld@gmail.com" method="get" enctype="text/plain">
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" name="service" required>
+            <option value="">Choose one</option>
+            <option>Craniosacral Therapy</option>
+            <option>Lymphatic Drainage</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="day">Day</label>
+          <select id="day" name="day" required>
+            <option value="">Choose a day</option>
+            <option value="mon">Monday</option>
+            <option value="tue">Tuesday</option>
+            <option value="thu">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+          </select>
+        </div>
+
+        <div class="time-groups" aria-label="Available times by part of day">
+          <div class="time-group">
+            <h3>Morning</h3>
+            <div class="field">
+              <label for="time-morning">Morning times</label>
+              <select id="time-morning" name="time_morning">
+                <option value="">Select a morning time</option>
+                <option>10:00 AM</option>
+                <option>10:30 AM</option>
+                <option>11:00 AM</option>
+                <option>11:30 AM</option>
+              </select>
+            </div>
+          </div>
+          <div class="time-group">
+            <h3>Afternoon</h3>
+            <div class="field">
+              <label for="time-afternoon">Afternoon times</label>
+              <select id="time-afternoon" name="time_afternoon">
+                <option value="">Select an afternoon time</option>
+                <option>1:00 PM</option>
+                <option>1:30 PM</option>
+                <option>2:00 PM</option>
+                <option>3:00 PM</option>
+                <option>4:00 PM</option>
+              </select>
+            </div>
+          </div>
+          <div class="time-group">
+            <h3>Evening</h3>
+            <div class="field">
+              <label for="time-evening">Evening times</label>
+              <select id="time-evening" name="time_evening">
+                <option value="">Select an evening time</option>
+                <option>5:00 PM</option>
+                <option>5:30 PM</option>
+                <option>6:00 PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" />
+        </div>
+
+        <div class="actions-row">
+          <button class="btn" type="submit">Request this time</button>
+          <button class="btn secondary" type="button" id="no-time-btn">Don’t see a time that works?</button>
+        </div>
+
+        <div class="reach-out" id="reach-out" hidden>
+          <h2 style="font-family:Fraunces,Georgia,serif;font-size:1.25rem">Reach out to set a time</h2>
+          <p>Tell Laura what you’re looking for and a few windows that work. She’ll follow up to lock something in.</p>
+          <div class="field">
+            <label for="preferred">Preferred days / times</label>
+            <textarea id="preferred" name="preferred" placeholder="e.g. Weekday mornings before 11, or Thursday after 3"></textarea>
+          </div>
+          <div class="field">
+            <label for="notes">Anything else</label>
+            <textarea id="notes" name="notes" placeholder="New client, returning, questions about modalities…"></textarea>
+          </div>
+          <div class="actions-row">
+            <a class="btn" href="mailto:healthyhandsld@gmail.com?subject=Appointment%20request%20—%20Laura%20Doss">Email Laura</a>
+            <a class="btn secondary" href="tel:5623947264">Call 562-394-7264</a>
+          </div>
+        </div>
+
+        <p class="note">Draft UX only. Real calendar sync and payment stay for the paid build after deposit.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Laura Doss, LMT · <a href="tel:5623947264">562-394-7264</a> · <a href="mailto:healthyhandsld@gmail.com">healthyhandsld@gmail.com</a>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var btn = document.getElementById("no-time-btn");
+      var panel = document.getElementById("reach-out");
+      var morning = document.getElementById("time-morning");
+      var afternoon = document.getElementById("time-afternoon");
+      var evening = document.getElementById("time-evening");
+
+      function clearOthers(except) {
+        [morning, afternoon, evening].forEach(function (el) {
+          if (el !== except) el.value = "";
+        });
+      }
+      morning.addEventListener("change", function () { if (morning.value) clearOthers(morning); });
+      afternoon.addEventListener("change", function () { if (afternoon.value) clearOthers(afternoon); });
+      evening.addEventListener("change", function () { if (evening.value) clearOthers(evening); });
+
+      function anyTimePicked() {
+        return Boolean(morning.value || afternoon.value || evening.value);
+      }
+      function syncTimeValidity() {
+        var msg = anyTimePicked()
+          ? ""
+          : "Pick a morning, afternoon, or evening time — or use Don’t see a time that works?";
+        morning.setCustomValidity(msg);
+      }
+      [morning, afternoon, evening].forEach(function (el) {
+        el.addEventListener("change", syncTimeValidity);
+      });
+      document.getElementById("book-form").addEventListener("submit", function (e) {
+        syncTimeValidity();
+        if (!anyTimePicked()) {
+          e.preventDefault();
+          morning.reportValidity();
+        }
+      });
+
+      btn.addEventListener("click", function () {
+        var open = panel.classList.toggle("is-open");
+        panel.hidden = !open;
+        if (open) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    })();
+  </script>
+</body>
+</html>
